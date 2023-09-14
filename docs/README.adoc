@@ -1,0 +1,19 @@
+Elektrohandel
+
+Entities:
+  -    Kunden
+  -    Mitarbeiter (vielleicht mit verschiedenen Positionen)
+  -    Filiale (Standorte)
+  -    Sortiment (verweist auf Produkte aus der Produktliste)
+  -    Produkt
+  -    Rechnung
+PLSQL:
+  -    Kauf
+  -    Verkauf
+  -    Anstellen von Mitarbeitern
+  -    Feuern von Mitarbeitern
+  -    Paar Select Statements 
+Trigger:
+  -    Beim Kauf werden Produkte, die es noch nicht gibt, neu erstellt
+  -    Beim Verkauf werden Produkte, die nicht mehr im Lager sind, wird ein Fehler geloggt
+  -    Beim Verkauf wird die Rechnung, die erstellt wird, geloggt
