@@ -1,0 +1,57 @@
+@startuml
+left to right direction
+Entity Customer {
+    * CustomerId
+    --
+    Name
+    Adress
+}
+Entity Employee {
+    * EmployeeId
+    BranchId
+    --
+    Name
+    Wage
+    Position
+}
+Entity Branch {
+    * BranchId
+    --
+    Adress
+}
+Entity Product {
+    * ProductId
+    --
+    Name
+    Price
+}
+Entity ProductSupply {
+    * BranchId
+    * ProductId
+    --
+    Amount
+}
+Entity Bill {
+    * BillId
+    EmployeeId
+    BranchId
+    --
+    Date
+}
+Entity BillRow {
+    * BillId
+    * ProductId
+    --
+    Amount
+}
+
+Employee ||--|{ Bill :> assists
+ProductSupply }|--|| Branch :< has
+Employee }|--|| Branch :< has
+Branch ||--|{ Bill :> issues
+Bill }|--|| Customer :< has
+Product ||--|{ BillRow :> has
+Bill ||--|{ BillRow :> has
+ProductSupply }|--|| Product :< has
+
+@enduml
