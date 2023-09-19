@@ -1,19 +1,41 @@
-Elektrohandel
+= Elektrohandel
+Winnie Ilming, Luka Cvijić and Tobias Aichinger
+:toc: left
+:sectnums:
+:toclevels: 3
+:table-caption:
+:linkattrs:
+:experimental:
 
-Entities:
-  -    Kunden
-  -    Mitarbeiter (vielleicht mit verschiedenen Positionen)
-  -    Filiale (Standorte)
-  -    Sortiment (verweist auf Produkte aus der Produktliste)
-  -    Produkt
-  -    Rechnung
-PLSQL:
-  -    Kauf
-  -    Verkauf
-  -    Anstellen von Mitarbeitern
-  -    Feuern von Mitarbeitern
-  -    Paar Select Statements 
-Trigger:
-  -    Beim Kauf werden Produkte, die es noch nicht gibt, neu erstellt
-  -    Beim Verkauf werden Produkte, die nicht mehr im Lager sind, wird ein Fehler geloggt
-  -    Beim Verkauf wird die Rechnung, die erstellt wird, geloggt
+== Fachdomäne
+In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr geschäfft machen müssen die verschiedenen Filialen und deren Mitarbeiter sowie ihre Produkte und Verkäufe verwaltet werden.
+
+* Employee(EmployeeId, BranchId, Name, Wage, Position)
+* Branch(BranchId, Address)
+* Bill(BillId, EmployeeId, BranchId, Date)
+* Customer(CustomerId, Name, Address)
+* BillRow(BillId, ProductId, Amount)
+* Product(ProductId, Name, Price)
+* ProductSupply(BranchId, ProductId, Amount)
+
+== Relevante Queries
+
+=== SQL
+
+* TODO
+
+=== Logging Trigger
+
+* Beim Kauf werden Produkte, die es noch nicht gibt, neu erstellt
+* Beim Verkauf werden Produkte, die nicht mehr im Lager sind, wird ein Fehler geloggt
+* Beim Verkauf wird die Rechnung, die erstellt wird, geloggt
+
+=== PL/SQL API zur Datenpflege
+
+* Kauf
+* Verkauf
+* Anstellen von Mitarbeitern
+* Feuern von Mitarbeitern
+
+== ERD
+image::images/erd.png[]
