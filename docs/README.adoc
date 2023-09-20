@@ -5,10 +5,11 @@ Winnie Ilming, Luka Cvijić and Tobias Aichinger
 :toclevels: 3
 :table-caption:
 :linkattrs:
+:sourcedir: ../sql
 :experimental:
 
 == Fachdomäne
-In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr geschäfft machen müssen die verschiedenen Filialen und deren Mitarbeiter sowie ihre Produkte und Verkäufe verwaltet werden.
+In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr geschäfft macht müssen die verschiedenen Filialen und deren Mitarbeiter sowie ihre Produkte und Verkäufe verwaltet werden.
 
 * Employee(EmployeeId, BranchId, Name, Wage, Position)
 * Branch(BranchId, Address)
@@ -17,6 +18,13 @@ In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr gesch
 * BillRow(BillId, ProductId, Amount)
 * Product(ProductId, Name, Price)
 * ProductSupply(BranchId, ProductId, Amount)
+
+=== DDL
+
+[source,sql]
+----
+include::{sourcedir}/create-tables.sql[]
+----
 
 == Relevante Queries
 
