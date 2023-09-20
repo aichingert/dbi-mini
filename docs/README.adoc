@@ -22,7 +22,12 @@ In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr gesch
 
 === SQL
 
-* TODO
+* Auflistung der Anzalh der Produkte die in einer Filliale verkauft werden
+* Auflistung des Umsatzes aller Fillialen
+* Auflistung aller Mitarbeiter die an einem bestimmten Tag etwas verkauft haben
+* Auflistung der meist verkauften 10 Produkte innerhalb einer Zeitspanne
+* Auflistung aller Produkte die im letzten Monat nie verkauft worden sind
+* Auflistung aller Kunden, die bei einem bestimmten Mitarbeiter etwas gekauft haben
 
 === Logging Trigger
 
@@ -32,10 +37,10 @@ In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr gesch
 
 === PL/SQL API zur Datenpflege
 
-* Kauf
-* Verkauf
+* Einkauf (Upsert)
+* Verkauf (Rechnung druck)
 * Anstellen von Mitarbeitern
-* Feuern von Mitarbeitern
+* Entlassen von Mitarbeitern
 
 == ERD
 image::images/erd.png[]
