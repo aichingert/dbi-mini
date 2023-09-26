@@ -32,7 +32,7 @@ CREATE TABLE Bill (
                       BillId NUMBER NOT NULL,
                       EmployeeId NUMBER NOT NULL,
                       BranchId NUMBER NOT NULL,
-                      Date DATE NOT NULL,
+                      DateOfIssue DATE NOT NULL,
                       PRIMARY KEY(BillId),
                       FOREIGN KEY(EmployeeId) REFERENCES Employee(EmployeeId),
                       FOREIGN KEY(BranchId) REFERENCES Branch(BranchId)
@@ -49,5 +49,5 @@ CREATE TABLE ProductSupply (
                                BranchId NUMBER NOT NULL,
                                ProductId NUMBER NOT NULL,
                                Amount NUMBER NOT NULL,
-                               PRIMARY KEY(BranchId, ProductId),
+                               PRIMARY KEY(BranchId, ProductId)
 );
