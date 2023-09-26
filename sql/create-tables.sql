@@ -25,7 +25,7 @@ CREATE TABLE Employee (
                           Wage Number NOT NULL,
                           Position VARCHAR2(50) NOT NULL,
                           PRIMARY KEY(EmployeeId),
-                          FOREIGN KEY(BranchId)
+                          FOREIGN KEY(BranchId) REFERENCES Branch(BranchId)
 );
 
 CREATE TABLE Bill (
@@ -34,7 +34,8 @@ CREATE TABLE Bill (
                       BranchId NUMBER NOT NULL,
                       Date DATE NOT NULL,
                       PRIMARY KEY(BillId),
-                      FOREIGN KEY(EmployeeId, BranchId)
+                      FOREIGN KEY(EmployeeId) REFERENCES Employee(EmployeeId),
+                      FOREIGN KEY(BranchId) REFERENCES Branch(BranchId)
 );
 
 CREATE TABLE BillRow (
