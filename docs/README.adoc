@@ -41,7 +41,7 @@ include::{sourcedir}/create-tables.sql[]
 
 * Beim Kauf werden Produkte, die es noch nicht gibt, neu erstellt
 * Beim Verkauf werden Produkte, die nicht mehr im Lager sind, wird ein Fehler geloggt
-* Beim Verkauf wird die Rechnung, die erstellt wird, geloggt
+* Beim updaten der Produkt anzahl werden informationen daüber geloggt
 
 === PL/SQL API zur Datenpflege
 
