@@ -13,4 +13,3 @@ podman run -d --name oradb \
 -e ORACLE_CHARACTERSET=AL32UTF8 \
 -v $DIR:/opt/oracle/oradata \
 container-registry.oracle.com/database/free:latest
-

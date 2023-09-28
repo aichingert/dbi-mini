@@ -14,7 +14,7 @@ BEGIN
 END;
 /
 
-declare
+DECLARE
     oldAmount NUMBER;
     newAmount NUMBER;
 BEGIN
@@ -26,3 +26,23 @@ BEGIN
     select AMOUNT into newAmount from PRODUCTSUPPLY WHERE BRANCHID = 1 and PRODUCTID = 1;
     dbms_output.put_line(newAmount);
 end;
+/
+
+CREATE OR REPLACE PROCEDURE HireEmployee(BRANCH IN NUMBER, NAME IN VARCHAR2(50), WAGE IN NUMBER, POSITION IN VARCHAR2(50)) IS
+    CorrectBranchId number;
+BEGIN
+    SELECT BranchID INTO CorrectBranchId FROM BRANCH
+    WHERE BRANCHID = BRANCH;
+
+    IF CorrectBranchId = BRANCH THEN
+        INSERT INTO EMPLOYEE (BRANCHID, NAME, WAGE, POSITION)
+        VALUES (BRANCH, NAME, WAGE, POSITION);
+        DBMS_OUTPUT.PUT_LINE('Employee Hired');
+        return;
+    end if;
+    DBMS_OUTPUT.PUT_LINE('Branch Id not found');
+Exception
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Exception Thrown');
+END;
+
