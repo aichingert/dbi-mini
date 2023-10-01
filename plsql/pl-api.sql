@@ -8,10 +8,25 @@ BEGIN
 
     UPDATE PRODUCTSUPPLY SET AMOUNT = currentAmount WHERE PRODUCTID = item and BRANCHID = branch;
 
-    -- randcases checken (was wenn wir das produkt noch garnicht haben)
-    -- exception ding machen
+EXCEPTION WHEN NO_DATA_FOUND THEN
+     dbms_output.put_line('WRONG IDs');
+     --INSERT PRODUCTSUPPLY [TRIGGER]
+     --TRIGGER checks if branch and product exist
+END buyItem;
+/
 
-END;
+CREATE OR REPLACE PROCEDURE sellItem (branch IN NUMBER, item IN NUMBER, amount IN NUMBER) IS
+    currentAmount number;
+BEGIN
+
+    Select Amount into currentAmount FROM PRODUCTSUPPLY WHERE PRODUCTID = item and BRANCHID = branch;
+
+    currentAmount := currentAmount - 1;
+
+    UPDATE PRODUCTSUPPLY SET AMOUNT = currentAmount WHERE PRODUCTID = item and BRANCHID = branch;
+EXCEPTION WHEN NO_DATA_FOUND THEN
+     dbms_output.put_line('WRONG IDs');
+END sellItem;
 /
 
 DECLARE
@@ -21,7 +36,7 @@ BEGIN
     select AMOUNT into oldAmount from PRODUCTSUPPLY WHERE BRANCHID = 1 and PRODUCTID = 1;
     dbms_output.put_line(oldAmount);
 
-    buyItem(1 , 1, 1);
+    sellItem(1 , 1, 1);
 
     select AMOUNT into newAmount from PRODUCTSUPPLY WHERE BRANCHID = 1 and PRODUCTID = 1;
     dbms_output.put_line(newAmount);
