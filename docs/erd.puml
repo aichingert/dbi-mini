@@ -36,6 +36,7 @@ Entity Bill {
     * BillId
     EmployeeId
     BranchId
+    CustomerId
     --
     Date
 }
