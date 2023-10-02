@@ -15,3 +15,23 @@ BEGIN
     END IF;
 END;
 /
+
+CREATE OR REPLACE TRIGGER product_added
+        AFTER INSERT ON PRODUCT
+        FOR EACH ROW
+DECLARE
+    CURSOR c_branch
+    IS SELECT BRANCHID FROM BRANCH;
+BEGIN
+    FOR branch IN c_branch LOOP
+        INSERT INTO PRODUCTSUPPLY (BRANCHID, PRODUCTID, AMOUNT)
+        VALUES (branch.BRANCHID, :new.productid, 0);
+        DBMS_OUTPUT.PUT_LINE('Product ' || :NEW.NAME || ' was added to supply from branch ' || branch.BRANCHID);
+    end loop;
+END;
+/
+
+BEGIN
+    Insert Into PRODUCT (NAME, PRICE)
+    VALUES ('Schnittlauchwlankabel', 9000000000);
+end;

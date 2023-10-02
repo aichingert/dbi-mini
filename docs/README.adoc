@@ -9,7 +9,7 @@ Winnie Ilming, Luka Cvijić and Tobias Aichinger
 :experimental:
 
 == Fachdomäne
-In einer großen Firma die aus dem verkauf von elektronischen Geräten ihr geschäfft macht müssen die verschiedenen Filialen und deren Mitarbeiter sowie ihre Produkte und Verkäufe verwaltet werden.
+In einer großen Firma die aus dem Verkauf von elektronischen Geräten ihr geschäfft macht müssen die verschiedenen Filialen und deren Mitarbeiter sowie ihre Produkte und Verkäufe verwaltet werden.
 
 * Employee(EmployeeId, BranchId, Name, Wage, Position)
 * Branch(BranchId, Address)
@@ -40,7 +40,7 @@ include::{sourcedir}/create-tables.sql[]
 === Logging Trigger
 
 * Beim Kauf werden Produkte, die es noch nicht gibt, neu erstellt
-* Beim Verkauf werden Produkte, die nicht mehr im Lager sind, wird ein Fehler geloggt
+* Beim Anlegen eines neuen Produkts, wird der Produkttyp in alle Lager eingeführt
 * Beim updaten der Produkt anzahl werden informationen darüber geloggt
 
 === PL/SQL API zur Datenpflege
