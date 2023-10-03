@@ -35,3 +35,27 @@ BEGIN
     Insert Into PRODUCT (NAME, PRICE)
     VALUES ('Schnittlauchwlankabel', 9000000000);
 end;
+
+CREATE OR REPLACE TRIGGER employee_fired
+        BEFORE DELETE ON EMPLOYEE
+        FOR EACH ROW
+DECLARE
+    branchAddress varchar2(50);
+    amountOfSoldItems number;
+BEGIN
+
+    SELECT ADDRESS into branchAddress FROM BRANCH WHERE BRANCH.BRANCHID = :OLD.BRANCHID;
+
+    SELECT SUM(AMOUNT) into amountOfSoldItems FROM BILLROW
+        INNER JOIN SYSTEM.BILL B on BILLROW.BILLID = B.BILLID
+    WHERE B.EMPLOYEEID = :OLD.EMPLOYEEID;
+
+    dbms_output.put_line(
+        'Employee ' || :OLD.NAME || ' worked for branch number ' || :OLD.BRANCHID || ' at ' || branchAddress);
+     dbms_output.put_line('and sold ' || amountOfSoldItems || ' items');
+END;
+/
+
+BEGIN
+    Delete FROM SYSTEM.EMPLOYEE WHERE EMPLOYEEID = 2;
+end;
