@@ -7,10 +7,16 @@ BEGIN
     SELECT NAME INTO PRODUCT_NAME FROM PRODUCT WHERE PRODUCT.PRODUCTID = :new.PRODUCTID;
 
     IF :NEW.AMOUNT < 0 THEN
+        Insert Into LOG (LOGMESSAGE, TIME) VALUES
+        ('ERROR (BRANCH ' || :new.BRANCHID || '): SOLD TOO MUCH', SYSDATE);
         dbms_output.put_line('ERROR (BRANCH ' || :new.BRANCHID || '): SOLD TOO MUCH');
     ELSIF :NEW.AMOUNT > :OLD.AMOUNT THEN
+        Insert Into LOG (LOGMESSAGE, TIME) VALUES
+        ('NEW PURCHASE (BRANCH ' || :new.BRANCHID || '): added ' || TO_CHAR(:NEW.AMOUNT - :OLD.AMOUNT) || ' new products of type ' || PRODUCT_NAME, SYSDATE);
         dbms_output.put_line('NEW PURCHASE (BRANCH ' || :new.BRANCHID || '): added ' || TO_CHAR(:NEW.AMOUNT - :OLD.AMOUNT) || ' new products of type ' || PRODUCT_NAME);
     ELSE
+        Insert Into LOG (LOGMESSAGE, TIME) VALUES
+        ('NEW SALE (BRANCH ' || :new.BRANCHID || '): sold ' || TO_CHAR(:OLD.AMOUNT - :NEW.AMOUNT) || ' products of type ' || PRODUCT_NAME, SYSDATE);
         dbms_output.put_line('NEW SALE (BRANCH ' || :new.BRANCHID || '): sold ' || TO_CHAR(:OLD.AMOUNT - :NEW.AMOUNT) || ' products of type ' || PRODUCT_NAME);
     END IF;
 END;
@@ -26,6 +32,8 @@ BEGIN
     FOR branch IN c_branch LOOP
         INSERT INTO PRODUCTSUPPLY (BRANCHID, PRODUCTID, AMOUNT)
         VALUES (branch.BRANCHID, :new.productid, 0);
+        Insert Into LOG (LOGMESSAGE, TIME) VALUES
+        ('Product ' || :NEW.NAME || ' was added to supply from branch ' || branch.BRANCHID, SYSDATE);
         DBMS_OUTPUT.PUT_LINE('Product ' || :NEW.NAME || ' was added to supply from branch ' || branch.BRANCHID);
     end loop;
 END;
@@ -52,9 +60,9 @@ BEGIN
 
     Update BILL set EMPLOYEEID = 0 where EMPLOYEEID = :OLD.EMPLOYEEID;
 
-    dbms_output.put_line(
-        'Employee ' || :OLD.NAME || ' worked for branch number ' || :OLD.BRANCHID || ' at ' || branchAddress);
-     dbms_output.put_line('and sold ' || amountOfSoldItems || ' items');
+    Insert Into LOG (LOGMESSAGE, TIME) VALUES
+    ('Employee ' || :OLD.NAME || ' worked for branch number ' || :OLD.BRANCHID || ' at ' || branchAddress || 'and sold ' || amountOfSoldItems || ' items', SYSDATE);
+    dbms_output.put_line('Employee ' || :OLD.NAME || ' worked for branch number ' || :OLD.BRANCHID || ' at ' || branchAddress || 'and sold ' || amountOfSoldItems || ' items');
 END;
 /
 
