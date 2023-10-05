@@ -9,8 +9,6 @@ BEGIN
     UPDATE PRODUCTSUPPLY SET AMOUNT = currentAmount WHERE PRODUCTID = item and BRANCHID = branch;
 
 EXCEPTION WHEN NO_DATA_FOUND THEN
-    --INSERT INTO PRODUCTSUPPLY (BRANCHID, PRODUCTID, AMOUNT) VALUES (branch, item, amountToBuy);
-    --check first if item and branch exist (maybe with after insert on PRODUCTSUPPLY)
     dbms_output.put_line('Item or branch does not exist.');
 END buyItem;
 /
