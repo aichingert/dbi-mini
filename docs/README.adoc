@@ -8,6 +8,10 @@ Winnie Ilming, Luka Cvijić and Tobias Aichinger
 :sourcedir: ../sql
 :experimental:
 
+== Mitglieder
+
+Winnie Ilming, Luka Cvijić und Tobias Aichinger
+
 == Fachdomäne
 In einer großen Firma die aus dem Verkauf von elektronischen Geräten ihr geschäfft macht müssen die verschiedenen Filialen und deren Mitarbeiter sowie ihre Produkte und Verkäufe verwaltet werden.
 
@@ -34,8 +38,13 @@ include::{sourcedir}/create-tables.sql[]
 * Auflistung des Umsatzes aller Fillialen
 * Auflistung aller Mitarbeiter die an einem bestimmten Tag etwas verkauft haben
 * Auflistung der meist verkauften 10 Produkte innerhalb einer Zeitspanne
-* Auflistung aller Produkte die im letzten Monat nie verkauft worden sind
+* Auflistung aller Produkte die außerhalb eines Zeitraums verkauft worden sind
 * Auflistung aller Kunden, die bei einem bestimmten Mitarbeiter etwas gekauft haben
+
+[source,sql]
+----
+include::{sourcedir}/select.sql[]
+----
 
 === Logging Trigger
 
@@ -43,12 +52,22 @@ include::{sourcedir}/create-tables.sql[]
 * Beim Anlegen eines neuen Produkts, wird der Produkttyp in alle Lager eingeführt
 * Beim updaten der Produkt anzahl werden informationen darüber geloggt
 
+[source, sql]
+----
+include::../plsql/trigger.sql[]
+----
+
 === PL/SQL API zur Datenpflege
 
 * Einkauf (Upsert)
 * Verkauf (Rechnung druck)
 * Anstellen von Mitarbeitern
 * Entlassen von Mitarbeitern
+
+[source, sql]
+----
+include::../plsql/pl-api.sql[]
+----
 
 == ERD
 image::images/erd.png[]
