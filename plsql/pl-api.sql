@@ -9,7 +9,7 @@ BEGIN
     UPDATE PRODUCTSUPPLY SET AMOUNT = currentAmount WHERE PRODUCTID = item and BRANCHID = branch;
 
 EXCEPTION WHEN NO_DATA_FOUND THEN
-    dbms_output.put_line('Item or branch does not exist.');
+    dbms_output.put_line('Item or branch does not exist!');
 END buyItem;
 /
 
@@ -23,7 +23,7 @@ BEGIN
 
     UPDATE PRODUCTSUPPLY SET AMOUNT = currentAmount WHERE PRODUCTID = item and BRANCHID = branch;
 EXCEPTION WHEN NO_DATA_FOUND THEN
-     dbms_output.put_line('Item or branch does not exist.');
+     dbms_output.put_line('Item or branch does not exist!');
 END sellItem;
 /
 
@@ -75,6 +75,6 @@ BEGIN
     IF SQL%ROWCOUNT = 1 THEN
         DBMS_OUTPUT.PUT_LINE('Removed Employee ' || EMP_NAME || ' from branch ' || TO_CHAR(BRANCH_ID));
     ELSE
-        DBMS_OUTPUT.PUT_LINE('Did not find employee in branch');
+        DBMS_OUTPUT.PUT_LINE('Did not find employee in branch!');
     END IF;
 END;
